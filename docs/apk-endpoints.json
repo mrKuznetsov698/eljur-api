@@ -1,0 +1,462 @@
+{
+  "apk_sha256": "6e5bc3a721987581b948b07d54d13e3cd86d7711a4a2997ef2fa974868c6a6a6",
+  "interfaces": [
+    {
+      "source": "feature_announcement_content/data/remote/AnnouncementInfoApi.java",
+      "http_method": "GET",
+      "path": "/apiv3/getboardnoticeinfo",
+      "method": "getAnnouncementInfo",
+      "query": [
+        "id",
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_announcements/data/remote/AnnouncementsApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getboardnotices",
+      "method": "getAnnouncements",
+      "query": [
+        "limit",
+        "page",
+        "auth_token",
+        "devkey",
+        "vendor",
+        "out_format"
+      ],
+      "headers": [
+        "User-Agent"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_choose_school/data/remote/ChooseSchoolApi.java",
+      "http_method": "GET",
+      "path": "/api/schools/mobileapp",
+      "method": "getSchools",
+      "query": [
+        "value",
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_control_works/data/remote/ControlWorksApi.java",
+      "http_method": "GET",
+      "path": "journal-cw-ajax-action",
+      "method": "getControlWorks",
+      "query": [
+        "method",
+        "student_id",
+        "dateStart",
+        "dateEnd",
+        "lesson_id",
+        "auth_token",
+        "devkey",
+        "vendor"
+      ],
+      "headers": [
+        "User-Agent",
+        "Cookie"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_control_works/data/remote/ControlWorksApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getmarks",
+      "method": "getMarks",
+      "query": [
+        "student",
+        "days",
+        "auth_token",
+        "devkey",
+        "vendor",
+        "out_format"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_diary/data/remote/DiaryApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getdiary",
+      "method": "getDiary",
+      "query": [
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor",
+        "days",
+        "rings",
+        "student"
+      ],
+      "headers": [
+        "User-Agent",
+        "Cookie"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_diary/data/remote/DiaryApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getperiods",
+      "method": "getPeriods",
+      "query": [
+        "weeks",
+        "show_disabled",
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [
+        "User-Agent"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_diary/data/remote/DiaryApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getrules",
+      "method": "getRules",
+      "query": [
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [
+        "User-Agent",
+        "Cookie"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_final_grades/data/remote/FinalGradesApi.java",
+      "http_method": "GET",
+      "path": "/apiv3/getfinalassessments",
+      "method": "getFinalGrades",
+      "query": [
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_homework/data/remote/HomeworkApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getdiary",
+      "method": "getHomework",
+      "query": [
+        "student",
+        "days",
+        "rings",
+        "auth_token",
+        "devkey",
+        "vendor",
+        "out_format"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_login/data/remote/LoginApi.java",
+      "http_method": "POST",
+      "path": "apiv3/auth",
+      "method": "login",
+      "query": [
+        "devkey",
+        "out_format",
+        "vendor"
+      ],
+      "headers": [
+        "User-Agent"
+      ],
+      "json_body": true,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_marks/data/remote/MarksApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getfinalassessments",
+      "method": "getFinalAssessments",
+      "query": [
+        "auth_token",
+        "devkey",
+        "vendor",
+        "out_format"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_marks/data/remote/MarksApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getmarks",
+      "method": "getMarks",
+      "query": [
+        "student",
+        "days",
+        "auth_token",
+        "devkey",
+        "vendor",
+        "out_format"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_marks/data/remote/MarksDiaryApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getdiary",
+      "method": "getDiary",
+      "query": [
+        "devkey",
+        "out_format",
+        "auth_token",
+        "person_id",
+        "vendor",
+        "days"
+      ],
+      "headers": [
+        "User-Agent",
+        "Cookie"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_marks/data/remote/PeriodsApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getperiods",
+      "method": "getPeriods",
+      "query": [
+        "weeks",
+        "show_disabled",
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [
+        "User-Agent"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_message_content/data/api/MessageContentApi.java",
+      "http_method": "GET",
+      "path": "/apiv3/getmessageinfo",
+      "method": "getMessageContent",
+      "query": [
+        "id",
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_messages/data/remote/MessagesApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getmessages",
+      "method": "getMessages",
+      "query": [
+        "folder",
+        "unreadonly",
+        "limit",
+        "page",
+        "filter",
+        "auth_token",
+        "devkey",
+        "vendor",
+        "out_format"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_profile/data/network/ProfileApi.java",
+      "http_method": "GET",
+      "path": "/apiv3/getrules",
+      "method": "getRules",
+      "query": [
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [
+        "User-Agent",
+        "Cookie"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_send_message/data/remote/MessageApi.java",
+      "http_method": "GET",
+      "path": "/apiv3/getmessagereceivers",
+      "method": "getMessageReceivers",
+      "query": [
+        "devkey",
+        "auth_token",
+        "out_format",
+        "vendor"
+      ],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_send_message/data/remote/MessageApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getrules",
+      "method": "getRules",
+      "query": [
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [
+        "User-Agent",
+        "Cookie"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_send_message/data/remote/MessageApi.java",
+      "http_method": "POST",
+      "path": "/apiv3/sendmessage",
+      "method": "sendMessage",
+      "query": [
+        "id",
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [],
+      "json_body": true,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_send_message/data/remote/MessageApi.java",
+      "http_method": "POST",
+      "path": "<dynamic URL>",
+      "method": "uploadFile",
+      "query": [],
+      "headers": [],
+      "json_body": false,
+      "multipart_part": true
+    },
+    {
+      "source": "feature_year_results/data/remote/YearResultsApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getdiary",
+      "method": "getDiary",
+      "query": [
+        "auth_token",
+        "vendor",
+        "days",
+        "student",
+        "devkey",
+        "out_format",
+        "rings"
+      ],
+      "headers": [
+        "User-Agent"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_year_results/data/remote/YearResultsApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getfinalassessments",
+      "method": "getFinalAssessments",
+      "query": [
+        "auth_token",
+        "student",
+        "devkey",
+        "vendor",
+        "out_format"
+      ],
+      "headers": [
+        "User-Agent"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_year_results/data/remote/YearResultsApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getmarks",
+      "method": "getMarks",
+      "query": [
+        "student",
+        "days",
+        "devkey",
+        "out_format",
+        "auth_token",
+        "vendor"
+      ],
+      "headers": [
+        "User-Agent"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    },
+    {
+      "source": "feature_year_results/data/remote/YearResultsApi.java",
+      "http_method": "GET",
+      "path": "apiv3/getmessages",
+      "method": "getMessages",
+      "query": [
+        "auth_token",
+        "folder",
+        "limit",
+        "devkey",
+        "vendor",
+        "out_format"
+      ],
+      "headers": [
+        "User-Agent"
+      ],
+      "json_body": false,
+      "multipart_part": false
+    }
+  ]
+}
