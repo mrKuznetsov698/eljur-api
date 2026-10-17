@@ -1,4 +1,4 @@
-"""python examples/diary.py after creating eljur.local.json."""
+"""python examples/diary.py after configuring eljur.local.json."""
 
 import getpass
 import json

@@ -405,27 +405,3 @@ def test_async_errors_and_cookie_isolation():
 
     asyncio.run(run())
     assert len(calls) == 5
-
-
-def test_config_extractor_uses_only_eljur_constants():
-    import runpy
-    from pathlib import Path
-
-    parse_constants = runpy.run_path(str(Path(__file__).parents[1] / "tools/extract_config.py"))[
-        "parse_constants"
-    ]
-    config = parse_constants("""
-        public static final String DEV_KEY = "synthetic-key";
-        public static final String USER_AGENT = "test-agent";
-        private static String _BASE_URL = "https://demo.eljur.ru";
-        private static String _VENDOR = "demo";
-        public static final String UNRELATED_KEY = "do-not-export";
-    """)
-    assert config == {
-        "vendor": "demo",
-        "devkey": "synthetic-key",
-        "base_url": "https://demo.eljur.ru",
-        "user_agent": "test-agent",
-    }
-    with pytest.raises(ValueError, match="Eljur constant"):
-        parse_constants("unrelated source")

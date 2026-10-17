@@ -15,7 +15,7 @@ T = TypeVar("T")
 
 def days_value(days: DateRange | str) -> str:
     value = str(days)
-    # Only the range format is established by this APK; avoid guessing other formats.
+    # Accept explicit YYYYMMDD-YYYYMMDD ranges.
     parts = value.split("-")
     if len(parts) != 2 or any(len(p) != 8 or not p.isdigit() for p in parts):
         raise ValueError("days must be a DateRange or YYYYMMDD-YYYYMMDD")
@@ -53,7 +53,7 @@ class Endpoints(Generic[T], ABC):
         return self._call(Call("apiv3/getrules"))
 
     def periods(self, *, weeks: bool = True, show_disabled: bool = True) -> T:
-        """Academic periods; APK defaults include weeks and disabled periods."""
+        """Academic periods; include weeks and disabled periods by default."""
         return self._call(
             Call(
                 "apiv3/getperiods",
@@ -97,7 +97,7 @@ class Endpoints(Generic[T], ABC):
         page: int = 1,
         search: str | None = None,
     ) -> T:
-        """One message page. search maps to the APK's filter query parameter."""
+        """One message page. search maps to the filter query parameter."""
         if folder not in ("inbox", "sent"):
             raise ValueError("folder must be inbox or sent")
         positive(limit, "limit")
@@ -116,7 +116,7 @@ class Endpoints(Generic[T], ABC):
         )
 
     def message(self, message_id: str) -> T:
-        """Fetch a message. The server may mark it read; this is not established by the APK."""
+        """Fetch a message. The server may mark it read; this behavior is unverified."""
         if not message_id:
             raise ValueError("message_id must not be empty")
         return self._call(Call("apiv3/getmessageinfo", {"id": message_id}))
@@ -133,7 +133,7 @@ class Endpoints(Generic[T], ABC):
         text: str,
         attachments: Sequence[Attachment] = (),
     ) -> T:
-        """Send explicitly; sender_id maps to the APK's person ID query parameter id.
+        """Send explicitly; sender_id maps to the person ID query parameter id.
 
         No retry is made, including after a connection failure. A timeout may occur
         after the server accepted a message; check sent messages before retrying.

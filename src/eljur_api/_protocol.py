@@ -36,7 +36,7 @@ def request_kwargs(config: Config, token: str | None, call: Call) -> dict[str, A
     if call.authenticated:
         params["auth_token"] = token
     params.update(call.params)
-    # Retrofit encodes Boolean Query values as lowercase true/false and omits null.
+    # Encode boolean query values as lowercase true/false and omit null.
     params = {
         k: str(v).lower() if isinstance(v, bool) else v for k, v in params.items() if v is not None
     }

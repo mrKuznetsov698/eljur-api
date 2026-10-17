@@ -135,7 +135,7 @@ class EljurClient(_Session, Endpoints[APIResponse]):
         field_name: str = "userfile",
         content_type: str = "application/octet-stream",
     ) -> APIResponse:
-        """Upload to rules().result['uploadFileUrl'] using the APK's userfile field.
+        """Upload to rules().result['uploadFileUrl'] using the userfile multipart field.
 
         Return result includes file/name for an Attachment. A separate session
         prevents account cookies reaching the upload origin. The caller chooses

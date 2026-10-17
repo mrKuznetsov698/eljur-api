@@ -1,8 +1,8 @@
 # Eljur API client
 
-A reusable **Python 3.10+** library for Eljur, based on protocol analysis of the supplied Nice Eljur Android APK. Blocking and asynchronous clients share the same endpoint definitions. No Android runtime is required.
+A reusable **Python 3.10+** library for Eljur. Blocking and asynchronous clients share the same endpoint definitions.
 
-**Status:** request contracts recovered from the APK and tested offline. Authenticated live behavior has **not** been verified: no Eljur credentials were supplied. School-specific permissions, token expiry semantics, and the web control-work endpoint may require integration work.
+**Status:** request serialization and response handling are tested offline. Authenticated live behavior has **not** been verified. School-specific permissions, token expiry semantics, and the web control-work endpoint may require integration work.
 
 ## Install
 
@@ -16,18 +16,24 @@ pip install .
 
 The package is named `eljur-api-client`; the import is `eljur_api`. It has not been published to PyPI.
 
-## Obtain the developer key from your APK
+## Configuration
 
-Eljur requires a `devkey` in addition to an account token. This repository does not publish the third-party application's embedded keys. The included helper extracts just the Eljur connection configuration from your local APK using [JADX 1.5.3](https://github.com/skylot/jadx/releases/tag/v1.5.3):
+Eljur requires a `devkey` in addition to an account token. Configure your school and developer key directly:
 
-```sh
-python tools/extract_config.py /path/to/nice-eljur.apk \
-  --jadx /path/to/jadx/bin/jadx --output eljur.local.json
+```python
+import os
+from eljur_api import Config
+
+config = Config(vendor="school", devkey=os.environ["ELJUR_DEVKEY"])
 ```
 
-The file is created with mode `0600` and is ignored by git. The helper requires Java and JADX only during extraction; the client itself does not. It does not copy the APK or decompiled sources into the project. You can also construct `Config(vendor="school", devkey="your-key")` directly using a developer key available to you.
+Alternatively, create a local `eljur.local.json` file:
 
-The supplied APK defaults to `hselyceum`. For another school, set **both** `vendor` and `base_url` in the extracted config, or omit `base_url` to use `https://<vendor>.eljur.ru`. For an institution with a custom hostname, use its actual HTTPS origin and vendor.
+```json
+{"vendor": "school", "devkey": "your-key"}
+```
+
+Keep this file private; `*.local.json` is ignored by git. The examples below load this configuration. When `base_url` is omitted, the client uses `https://<vendor>.eljur.ru`. For an institution with a custom hostname, set `base_url` to its HTTPS origin and `vendor` to its school identifier.
 
 ## Login and read the diary
 
@@ -54,7 +60,7 @@ with EljurClient(config) as api:
     print(diary.result)
 ```
 
-`login()` returns `AuthToken(token, expires)` and stores the token in memory. To reuse a caller-managed token, construct `EljurClient(config, auth_token=...)`. The SDK never saves credentials or tokens to disk. `clear_token()` forgets the token locally; it does not revoke it on the server. The APK provides no verified logout/refresh operation.
+`login()` returns `AuthToken(token, expires)` and stores the token in memory. To reuse a caller-managed token, construct `EljurClient(config, auth_token=...)`. The SDK never saves credentials or tokens to disk. `clear_token()` forgets the token locally; it does not revoke it on the server. Server-side logout and token refresh are not implemented.
 
 ## Async use
 
@@ -91,7 +97,7 @@ Every endpoint below works on both clients. On the async client, await the resul
 
 Endpoint methods return `APIResponse(state, result, raw)`. API v3's `response.result` becomes `.result`; `.raw` keeps the complete original JSON. School discovery returns its `options` list as `.result`. Control works and upload use their original top-level objects as `.result`.
 
-Result data is intentionally lossless JSON. The APK itself has incompatible projections of some fields, such as homework, IDs, marks, weights and school-specific relations. The SDK does not cast `"5-"` to a number, collapse dictionary IDs, or discard unknown fields. [Protocol notes](docs/protocol.md) describe the observed shapes.
+Result data is intentionally lossless JSON. Fields such as homework, IDs, marks, weights and school-specific relations can have different representations. The SDK does not cast `"5-"` to a number, collapse dictionary IDs, or discard unknown fields. [Protocol notes](docs/protocol.md) describe the observed shapes.
 
 ```python
 from eljur_api import AuthenticationError, RateLimitError, EljurError
@@ -140,7 +146,7 @@ sent = api.send_message(
 
 School cookies and token/developer-key parameters are never attached to the upload request. The URL may already contain a signed query string, which is preserved. Choose it from your own authenticated response. The byte-content API buffers the file in memory.
 
-For control works, the APK declares an optional Cookie header. Pass `cookie="name=value; ..."` to the constructor if your school requires a web session. The SDK does not implement web login, ESIA/MOS SSO, CAPTCHA handling, or automatic attachment downloads.
+Control-work requests support an optional Cookie header. Pass `cookie="name=value; ..."` to the constructor if your school requires a web session. The SDK does not implement web login, ESIA/MOS SSO, CAPTCHA handling, or automatic attachment downloads.
 
 ## Development
 
@@ -152,6 +158,6 @@ python -m mypy src
 python -m build
 ```
 
-Tests use synthetic fixtures and `httpx.MockTransport`, with no real students, accounts, keys, or network access. See [reverse-engineering provenance](docs/reverse-engineering.md) for APK hash, recovered classes, limitations, and reproduction commands. The original APK, app source, telemetry backend, and third-party embedded keys are not redistributed.
+Tests use synthetic fixtures and `httpx.MockTransport`, with no real students, accounts, keys, or network access. See the [protocol reference](docs/protocol.md) for endpoints, response shapes, and current limitations.
 
-MIT license covers this original SDK implementation. This is an unofficial project, unaffiliated with Eljur or Nice Eljur.
+This SDK is distributed under the MIT license and is not affiliated with Eljur.

@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "eljur-api-client"
 version = "0.1.0"
-description = "Reusable sync and async Python client for the Eljur protocol recovered from Nice Eljur"
+description = "Reusable sync and async Python client for Eljur API v3"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"

@@ -8,5 +8,3 @@ dist/
 *.egg-info/
 .env
 *.local.json
-*.apk
-decompiled/

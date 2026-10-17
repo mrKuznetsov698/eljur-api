@@ -1,4 +1,4 @@
-"""Eljur API v3 client recovered from the supplied Nice Eljur Android APK."""
+"""Synchronous and asynchronous Eljur API v3 clients."""
 
 from .client import AsyncEljurClient, EljurClient
 from .errors import (
